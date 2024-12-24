@@ -105,15 +105,16 @@ def delete_product(product_id):
 
 # دي داله لفتح الموقع
 def open_browser():
-    url = "http://127.0.0.1:4000/"
+    url = "http://127.0.0.1:4400/"
     webbrowser.open(url)
+    #دي داله اغلاق السيرفر
 @app.route('/shutdown', methods=['POST'])
 def shutdown():
     os.kill(os.getpid(), signal.SIGINT)
     return 'تم إيقاف السيرفر بنجاح.'
 # تشغيل الخادم في خيط منفصل
 def run_server():
-    app.run(host='0.0.0.0', port=4000,debug=True, use_reloader=False)  # use_reloader=False عشان الخادم ميشتغلش مرتين
+    app.run(host='0.0.0.0', port=4400,debug=True, use_reloader=False)  # use_reloader=False عشان الخادم ميشتغلش مرتين
 # تشغيل الخادم وفتح المتصفح بعد بدء الخادم
 if __name__ == "__main__":
     # تشغيل الخادم في خيط منفصل
