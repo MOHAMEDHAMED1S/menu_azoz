@@ -1,25 +1,21 @@
-const jsonFile = 'products.json'; // ملف المنتجات
+const jsonFile = 'products.json'; 
 
-// تحميل المنتجات
 async function loadProducts() {
     const response = await fetch(jsonFile);
     const products = await response.json();
     return products;
 }
 
-// عرض المنتجات في المنيو
 async function displayMenu() {
     const products = await loadProducts();
     const menu = document.getElementById("menu");
 
 
     products.forEach(product => {
-        // إنشاء العنصر li
         const listItem = document.createElement("li");
         listItem.classList.add("appItem");
         listItem.setAttribute("data-ingredients", "chicken, seasoning"); // يمكنك تعديل هذه القيمة حسب الحاجة
       
-        // إضافة المحتوى داخل العنصر li
         listItem.innerHTML = `
           ${product.name}  
           <p>${product.description}</p>
@@ -33,7 +29,6 @@ async function displayMenu() {
 ">${product.price} جنـية</span>
         `;
       
-        // إضافة العنصر إلى القائمة
         menu.appendChild(listItem);
       });
 }
