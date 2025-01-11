@@ -7,7 +7,6 @@
 
     <title>إدارة منتجات المطعم</title>
     <style>
-        /* عام */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #1e1e1e;
@@ -304,7 +303,6 @@ margin-top: 0px;
         const productsContainer = document.getElementById('products');
         const toastContainer = document.getElementById('toastContainer');
 
-        // جلب المنتجات
         async function fetchProducts() {
             const response = await fetch('/products');
             const products = await response.json();
@@ -313,7 +311,6 @@ margin-top: 0px;
 
         let currentEditIndex = null;
 
-        // إظهار استمارة التعديل مع البيانات الحالية
         function editProduct(index) {
             const productDiv = productsContainer.children[index];
             const product = JSON.parse(productDiv.dataset.product);
@@ -329,14 +326,12 @@ margin-top: 0px;
             window.scrollTo(0, 0);
         }
 
-        // إلغاء التعديل
         function cancelEdit() {
             currentEditIndex = null;
             document.getElementById('editForm').reset();
             document.getElementById('editForm').style.display = 'none';
         }
 
-        // إرسال طلب تعديل المنتج
         document.getElementById('editForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             if (currentEditIndex === null) return;
@@ -357,7 +352,6 @@ margin-top: 0px;
             }
         });
 
-        // عرض المنتجات
         function displayProducts(products) {
             productsContainer.innerHTML = '';
             products.forEach((product, index) => {
@@ -378,7 +372,6 @@ margin-top: 0px;
             });
         }
 
-        // إضافة منتج
         productForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(productForm);
@@ -396,7 +389,6 @@ margin-top: 0px;
             }
         });
 
-        // حذف منتج
         async function deleteProduct(index) {
             const response = await fetch(`/delete_product/${index}`, {
                 method: 'DELETE'
@@ -415,21 +407,18 @@ margin-top: 0px;
             });
             if (response.ok) {
                 showToast('تم اغلاق السيرفر بنجاح', 'success');
-                // دالة لإغلاق علامة التبويب بعد 5 ثوانٍ
                 function closeTabAfterDelay() {
                     setTimeout(() => {
                         window.close();
-                    }, 1000); // 5000 ملي ثانية = 5 ثوانٍ
+                    }, 1000); 
                 }
 
-                // استدعاء الدالة لإغلاق علامة التبويب
                 closeTabAfterDelay();
 
                 
             }
 
         }
-        // عرض Toast
         function showToast(message, type) {
             const toast = document.createElement('div');
             toast.classList.add('toast', type, 'show');
@@ -459,7 +448,6 @@ margin-top: 0px;
             }, 3000);
         }
 
-        // تحميل المنتجات عند الفتح
         fetchProducts();
     </script>
 </body>
